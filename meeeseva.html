@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MeeSeva Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+body{
+    background:#f2f2f2;
+}
+.app{
+    max-width:420px;
+    margin:auto;
+    background:#fff;
+    min-height:100vh;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+.header{
+    background:linear-gradient(to right,#ff9933,#ffffff,#138808);
+    text-align:center;
+    padding:15px;
+}
+.header h1{font-size:20px;}
+.header p{font-size:13px;font-weight:bold;}
+
+.lang-toggle{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:10px 0;
+}
+.lang-toggle button{
+    padding:6px 14px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    background:#138808;
+    color:white;
+    font-weight:bold;
+}
+
+.section{
+    padding:15px;
+}
+.section h2{
+    color:#138808;
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+/* SERVICES ACCORDION */
+.service-box{
+    background:#fff;
+    margin-bottom:10px;
+    border-left:5px solid #ff9933;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+.service-header{
+    padding:12px;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+}
+.service-content{
+    display:none;
+    padding:10px 15px;
+    font-size:13px;
+    background:#f9f9f9;
+}
+.service-content li{
+    margin-bottom:6px;
+}
+
+/* STATUS */
+.status{
+    background:#f9f9f9;
+    border:1px solid #138808;
+    padding:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display:flex;
+    justify-content:space-around;
+    margin:15px;
+}
+.actions a{
+    text-decoration:none;
+    color:white;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+}
+.call{background:#138808;}
+.whatsapp{background:#25D366;}
+
+/* MAP */
+.map iframe{
+    width:100%;
+    height:200px;
+    border:none;
+    border-radius:10px;
+}
+
+.footer{
+    background:#138808;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<div class="header">
+    <h1 id="title">MeeSeva Center</h1>
+    <p id="subtitle">Government Services at Your Fingertips</p>
+</div>
+
+<div class="lang-toggle">
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('te')">తెలుగు</button>
+</div>
+
+<div class="section">
+    <h2 id="aboutTitle">About</h2>
+    <p id="aboutText">
+        Operated by Kondamadugula Venkata Siva Reddy providing trusted MeeSeva services.
+    </p>
+</div>
+
+<div class="section">
+    <h2 id="serviceTitle">Services</h2>
+
+    <div class="service-box">
+        <div class="service-header" onclick="toggle(this)">Aadhaar Services ➕</div>
+        <div class="service-content">
+            <ul>
+                <li>Aadhaar New Enrollment</li>
+                <li>Mobile Number Update</li>
+                <li>Address Update</li>
+                <li>Photo Update</li>
+                <li>Date of Birth Correction</li>
+                <li>Name Correction</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="service-box">
+        <div class="service-header" onclick="toggle(this)">PAN Card Services ➕</div>
+        <div class="service-content">
+            <ul>
+                <li>New PAN Card Apply</li>
+                <li>PAN Correction</li>
+                <li>Duplicate PAN Card</li>
+                <li>PAN – Aadhaar Linking</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="service-box">
+        <div class="service-header" onclick="toggle(this)">Voter ID Services ➕</div>
+        <div class="service-content">
+            <ul>
+                <li>New Voter ID Registration</li>
+                <li>Correction in Voter ID</li>
+                <li>Address Change</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="service-box">
+        <div class="service-header" onclick="toggle(this)">Certificates ➕</div>
+        <div class="service-content">
+            <ul>
+                <li>Birth Certificate</li>
+                <li>Death Certificate</li>
+                <li>Income Certificate</li>
+                <li>Caste Certificate</li>
+                <li>Residence Certificate</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="section">
+    <h2 id="timeTitle">Working Hours</h2>
+    <div class="status" id="statusText"></div>
+</div>
+
+<div class="actions">
+    <a href="tel:9642870189" class="call">📞 Call</a>
+    <a href="https://wa.me/919642870189" target="_blank" class="whatsapp">💬 WhatsApp</a>
+</div>
+
+<div class="section map">
+    <h2 id="mapTitle">Location</h2>
+    <iframe src="https://maps.google.com/maps?q=Venigandla%20Pedakakani%20Guntur&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+
+<div class="footer">
+    © 2026 MeeSeva Center – All Rights Reserved
+</div>
+
+</div>
+
+<script>
+function toggle(el){
+    const content = el.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+}
+
+function updateStatus(){
+    const now = new Date();
+    const h = now.getHours();
+    const d = now.getDay();
+    const s = document.getElementById("statusText");
+
+    if(d === 0){
+        s.innerHTML = "❌ Closed Today (Sunday)";
+        s.style.color = "red";
+    } else if(h >= 9 && h < 18){
+        s.innerHTML = "✅ Open Now (9 AM – 6 PM)";
+        s.style.color = "green";
+    } else {
+        s.innerHTML = "❌ Closed (9 AM – 6 PM)";
+        s.style.color = "red";
+    }
+}
+updateStatus();
+
+function setLang(lang){
+    if(lang === 'te'){
+        title.innerText="మీ సేవ కేంద్రం";
+        subtitle.innerText="ప్రభుత్వ సేవలు మీ చేతిలో";
+        aboutTitle.innerText="గురించి";
+        aboutText.innerText="కొండమడుగుల వెంకట శివ రెడ్డి గారి ఆధ్వర్యంలో నమ్మకమైన సేవలు.";
+        serviceTitle.innerText="సేవలు";
+        timeTitle.innerText="పనిచేసే సమయం";
+        mapTitle.innerText="చిరునామా";
+    } else {
+        location.reload();
+    }
+}
+</script>
+
+</body>
+</html>
